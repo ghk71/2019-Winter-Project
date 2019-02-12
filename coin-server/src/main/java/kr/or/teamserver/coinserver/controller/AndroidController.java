@@ -2,6 +2,7 @@ package kr.or.teamserver.coinserver.controller;
 
 import kr.or.teamserver.coinserver.controller.dto.ResultDto;
 import kr.or.teamserver.coinserver.controller.dto.WasherDto;
+import kr.or.teamserver.coinserver.controller.dto.QuestionDto;
 import kr.or.teamserver.coinserver.model.Washer;
 import kr.or.teamserver.coinserver.service.WasherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 @RestController
@@ -35,5 +37,15 @@ public class AndroidController {
     public ResultDto<WasherDto> searchOne(@PathVariable long id) {
         Washer washer = washerService.findOne(id);
         return ResultDto.from(List.of(washer));
+    }
+
+    @GetMapping("/specialQuestion")
+    public String[] searchSpecial(QuestionDto questionDto) {
+        return questionDto.getEsp();
+    }
+
+    @GetMapping("/generateQuestion")
+    public String[] searchGenerate(QuestionDto questionDto) {
+        return questionDto.getGen();
     }
 }
